@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutStatement from "@/components/AboutStatement";
 import BigTextSection from "@/components/BigTextSection";
+import ShowreelSection from "@/components/ShowreelSection";
 import ServicesSection from "@/components/ServicesSection";
 import PrideSection from "@/components/PrideSection";
 import GrowthSection from "@/components/GrowthSection";
