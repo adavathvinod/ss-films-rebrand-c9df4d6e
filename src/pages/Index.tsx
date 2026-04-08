@@ -5,12 +5,30 @@ import BigTextSection from "@/components/BigTextSection";
 import ServicesSection from "@/components/ServicesSection";
 import PrideSection from "@/components/PrideSection";
 import GrowthSection from "@/components/GrowthSection";
+import ShowreelSection from "@/components/ShowreelSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import AboutSection from "@/components/AboutSection";
 import FAQSection from "@/components/FAQSection";
 import FooterSection from "@/components/FooterSection";
 
 const Index = () => {
+  return (
+    <div className="bg-background text-foreground overflow-x-hidden">
+      <Navbar />
+      <HeroSection />
+      <AboutStatement />
+      <BigTextSection />
+      <ServicesSection />
+      <PrideSection />
+      <ShowreelSection />
+      <GrowthSection />
+      <ProjectsSection />
+      <AboutSection />
+      <FAQSection />
+      <FooterSection />
+    </div>
+  );
+};
   return (
     <div className="bg-background text-foreground overflow-x-hidden">
       <Navbar />
