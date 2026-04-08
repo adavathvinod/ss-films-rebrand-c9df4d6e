@@ -29,21 +29,5 @@ const Index = () => {
     </div>
   );
 };
-  return (
-    <div className="bg-background text-foreground overflow-x-hidden">
-      <Navbar />
-      <HeroSection />
-      <AboutStatement />
-      <BigTextSection />
-      <ServicesSection />
-      <PrideSection />
-      <GrowthSection />
-      <ProjectsSection />
-      <AboutSection />
-      <FAQSection />
-      <FooterSection />
-    </div>
-  );
-};
 
 export default Index;
