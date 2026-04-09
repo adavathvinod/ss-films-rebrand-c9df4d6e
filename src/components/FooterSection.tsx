@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import footerArt from "@/assets/footer-art.png";
 
 const FooterSection = () => {
   const ref = useRef(null);
@@ -7,6 +8,17 @@ const FooterSection = () => {
 
   return (
     <footer id="contact" ref={ref} className="section-dark py-16 md:py-24 px-6 md:px-10 relative overflow-hidden">
+      {/* Background Art Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={footerArt}
+          alt=""
+          className="w-full h-full object-cover opacity-[0.12]"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark-surface via-dark-surface/90 to-dark-surface/60" />
+      </div>
+
       <div className="max-w-[1400px] mx-auto relative z-10">
         {/* Top row */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 mb-20">
