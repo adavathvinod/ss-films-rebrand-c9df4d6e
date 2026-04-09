@@ -64,13 +64,6 @@ const ShowreelSection = () => {
         </button>
       </motion.div>
 
-      {/* Mute/Unmute Button */}
-      <button
-        onClick={toggleMute}
-        className="absolute bottom-8 right-8 z-20 p-3 border border-primary-foreground/20 rounded-full text-primary-foreground/60 hover:text-primary-foreground hover:border-primary-foreground/50 transition-colors backdrop-blur-sm"
-      >
-        {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-      </button>
     </section>
   );
 };
