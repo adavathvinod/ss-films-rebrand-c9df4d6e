@@ -8,8 +8,10 @@ import PrideSection from "@/components/PrideSection";
 import GrowthSection from "@/components/GrowthSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import AboutSection from "@/components/AboutSection";
+import CollaborationsSection from "@/components/CollaborationsSection";
 import FAQSection from "@/components/FAQSection";
 import TeamSection from "@/components/TeamSection";
+import ContactSection from "@/components/ContactSection";
 import FooterSection from "@/components/FooterSection";
 
 const Index = () => {
@@ -25,8 +27,10 @@ const Index = () => {
       <GrowthSection />
       <ProjectsSection />
       <AboutSection />
+      <CollaborationsSection />
       <FAQSection />
       <TeamSection />
+      <ContactSection />
       <FooterSection />
     </div>
   );
