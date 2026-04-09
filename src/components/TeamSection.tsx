@@ -48,7 +48,7 @@ const TeamSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-dark-surface via-transparent to-transparent opacity-60" />
               <div className="absolute bottom-6 left-6">
-                <h3 className="text-dark-surface-foreground text-2xl font-bold">Sai Kumar</h3>
+                <h3 className="text-dark-surface-foreground text-2xl font-bold">Santhosh Kumar</h3>
                 <p className="text-primary text-sm uppercase tracking-widest mt-1">Founder & CEO</p>
               </div>
             </div>
@@ -61,7 +61,7 @@ const TeamSection = () => {
             className="flex-1"
           >
             <h2 className="heading-lg text-dark-surface-foreground mb-6">
-              "I started SS Films with one belief — AI isn't replacing creativity, it's unleashing it."
+               "I started SS Films with one belief — AI isn't replacing creativity, it's unleashing it."
             </h2>
             <p className="text-body text-dark-surface-foreground/60 text-base md:text-lg leading-relaxed mb-6">
               With a background in filmmaking and a deep passion for artificial intelligence, our founder saw the gap between traditional ad production and the future of visual storytelling. SS Films was born to bridge that gap — delivering cinematic-quality ad films at the speed of thought.
