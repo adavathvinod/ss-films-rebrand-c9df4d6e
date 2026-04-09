@@ -9,6 +9,7 @@ import GrowthSection from "@/components/GrowthSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import AboutSection from "@/components/AboutSection";
 import FAQSection from "@/components/FAQSection";
+import TeamSection from "@/components/TeamSection";
 import FooterSection from "@/components/FooterSection";
 
 const Index = () => {
