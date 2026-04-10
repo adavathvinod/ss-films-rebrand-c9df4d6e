@@ -1,100 +1,131 @@
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
-import project4 from "@/assets/project-4.jpg";
-import project5 from "@/assets/project-5.jpg";
-import project6 from "@/assets/project-6.jpg";
-
-const categories = ["ALL WORK", "AD FILM", "BRAND", "PRODUCT", "SOCIAL"];
+import { useRef, useEffect, useState } from "react";
+import projectVideo1 from "@/assets/project-video-1.mp4.asset.json";
+import projectVideo2 from "@/assets/project-video-2.mp4.asset.json";
+import projectVideo3 from "@/assets/project-video-3.mp4.asset.json";
+import projectVideo4 from "@/assets/project-video-4.mp4.asset.json";
+import projectVideo5 from "@/assets/project-video-5.mp4.asset.json";
+import projectVideo6 from "@/assets/project-video-6.mp4.asset.json";
 
 const projects = [
-  { title: "LuxeAura", category: "AD FILM", image: project1 },
-  { title: "NeonVibe", category: "BRAND", image: project2 },
-  { title: "BiteKraft", category: "PRODUCT", image: project3 },
-  { title: "AutoPulse", category: "AD FILM", image: project4 },
-  { title: "TechNova", category: "SOCIAL", image: project5 },
-  { title: "Chronos", category: "PRODUCT", image: project6 },
+  { title: "LuxeAura", category: "AD FILM", video: projectVideo1.url },
+  { title: "NeonVibe", category: "BRAND", video: projectVideo2.url },
+  { title: "BiteKraft", category: "PRODUCT", video: projectVideo3.url },
+  { title: "AutoPulse", category: "AD FILM", video: projectVideo4.url },
+  { title: "TechNova", category: "SOCIAL", video: projectVideo5.url },
+  { title: "Chronos", category: "PRODUCT", video: projectVideo6.url },
 ];
 
-const ProjectsSection = () => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-  const [filter, setFilter] = useState("ALL WORK");
+const StickyCard = ({
+  project,
+  index,
+  total,
+}: {
+  project: (typeof projects)[0];
+  index: number;
+  total: number;
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  const filtered = filter === "ALL WORK" ? projects : projects.filter((p) => p.category === filter);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      // Progress: 0 when card top is at viewport top, 1 when card is fully covered
+      const progress = Math.max(0, Math.min(1, -rect.top / windowH));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Cards underneath scale down and darken as next card covers them
+  const scale = 1 - scrollProgress * 0.08;
+  const overlay = scrollProgress * 0.6;
 
   return (
-    <section id="projects" ref={ref} className="py-24 md:py-40 px-6 md:px-10 bg-background">
-      <div className="max-w-[1400px] mx-auto">
-        {/* Category filter bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="sticky top-16 md:top-20 z-30 bg-foreground text-background px-4 md:px-8 py-3 flex gap-4 md:gap-8 overflow-x-auto mb-16"
-        >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`uppercase text-xs md:text-sm tracking-widest font-medium whitespace-nowrap transition-all duration-300 ${
-                filter === cat ? "text-background" : "text-background/50 hover:text-background/80"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </motion.div>
+    <div
+      ref={cardRef}
+      className="h-screen w-full"
+      style={{ zIndex: index + 1 }}
+    >
+      <div
+        className="sticky top-0 h-screen w-full overflow-hidden"
+        style={{
+          transform: `scale(${scale})`,
+          transformOrigin: "center top",
+        }}
+      >
+        {/* Video background */}
+        <video
+          src={project.video}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
-        {/* Project grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {filtered.map((project, i) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 60 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: i * 0.12 }}
-              layout
-              className="group cursor-pointer"
-            >
-              <div className="relative overflow-hidden">
-                <motion.img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  width={800}
-                  height={600}
-                  className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
+        {/* Darken overlay driven by scroll */}
+        <div
+          className="absolute inset-0 bg-black pointer-events-none transition-none"
+          style={{ opacity: overlay }}
+        />
+
+        {/* Base gradient for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+
+        {/* Content */}
+        <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-16 lg:p-24">
+          <span className="text-xs md:text-sm uppercase tracking-[0.3em] text-primary font-medium mb-3">
+            {project.category}
+          </span>
+          <h2
+            className="text-4xl md:text-6xl lg:text-8xl font-bold text-white leading-none"
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+          >
+            {project.title}
+          </h2>
+          <div className="mt-6 flex items-center gap-3">
+            <div className="w-10 h-10 border border-white/40 flex items-center justify-center hover:border-primary hover:bg-primary/10 transition-all duration-300 cursor-pointer">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M1 13L13 1M13 1H3M13 1V11"
+                  stroke="white"
+                  strokeWidth="1.5"
                 />
-                {/* Floating accent dots */}
-                <motion.div
-                  className="absolute top-4 left-4 w-3 h-3 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  animate={{ scale: [1, 1.4, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </div>
-              <div className="mt-4 flex items-center justify-between border-b border-border pb-4">
-                <div>
-                  <h3 className="heading-display text-xl text-foreground">{project.title}</h3>
-                  <span className="text-xs uppercase tracking-widest text-primary mt-1 block">
-                    {project.category}
-                  </span>
-                </div>
-                <motion.div
-                  whileHover={{ rotate: 45 }}
-                  className="w-8 h-8 border border-foreground flex items-center justify-center"
-                >
-                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-                    <path d="M1 13L13 1M13 1H3M13 1V11" stroke="currentColor" strokeWidth="1.5" />
-                  </svg>
-                </motion.div>
-              </div>
-            </motion.div>
-          ))}
+              </svg>
+            </div>
+            <span className="text-white/50 text-sm tracking-wider uppercase">
+              View Project
+            </span>
+          </div>
+
+          {/* Card index indicator */}
+          <div className="absolute bottom-8 right-8 md:bottom-16 md:right-16 lg:bottom-24 lg:right-24">
+            <span className="text-white/20 text-7xl md:text-9xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+const ProjectsSection = () => {
+  return (
+    <section id="projects" className="relative bg-background">
+      {projects.map((project, i) => (
+        <StickyCard
+          key={project.title}
+          project={project}
+          index={i}
+          total={projects.length}
+        />
+      ))}
     </section>
   );
 };
