@@ -8,11 +8,10 @@ const AboutStatement = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  const words = "NO CAMERAS. NO CREWS. JUST BOLD IDEAS TURNED INTO AD FILMS MADE WITH AI.".split(" ");
+  const words = "WE DON'T JUST GENERATE VISUALS — WE ENGINEER THEM. FROM CONCEPT TO FINAL FRAME.".split(" ");
 
   return (
     <section ref={ref} className="relative py-32 md:py-48 px-6 md:px-10 overflow-hidden bg-background">
-      {/* Floating images like the reference */}
       <motion.img
         src={project1}
         alt="Project"
@@ -63,7 +62,6 @@ const AboutStatement = () => {
         </div>
       </div>
 
-      {/* Divider line */}
       <motion.div
         initial={{ scaleX: 0 }}
         animate={inView ? { scaleX: 1 } : {}}

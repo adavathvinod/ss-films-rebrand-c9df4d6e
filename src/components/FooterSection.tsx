@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import footerArt from "@/assets/footer-art.png";
+import chitramLogo from "@/assets/chitram-logo.png";
 
 const FooterSection = () => {
   const ref = useRef(null);
@@ -8,7 +9,6 @@ const FooterSection = () => {
 
   return (
     <footer id="contact" ref={ref} className="section-dark py-16 md:py-24 px-6 md:px-10 relative overflow-hidden">
-      {/* Background Art Image */}
       <div className="absolute inset-0 z-0">
         <img
           src={footerArt}
@@ -20,7 +20,6 @@ const FooterSection = () => {
       </div>
 
       <div className="max-w-[1400px] mx-auto relative z-10">
-        {/* Top row */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 mb-20">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -28,11 +27,15 @@ const FooterSection = () => {
             transition={{ duration: 0.8 }}
             className="flex-1 max-w-md"
           >
+            <div className="flex items-center gap-3 mb-6">
+              <img src={chitramLogo} alt="Chitram Labs" className="h-8 w-auto" style={{ filter: "brightness(1.2)" }} />
+              <span className="heading-display text-lg text-dark-surface-foreground">CHITRAM LABS</span>
+            </div>
             <p className="text-body text-dark-surface-foreground font-semibold text-lg md:text-xl leading-relaxed">
               We want to make important work, have a vision, and see it through.
             </p>
             <a
-              href="mailto:hello@ssfilms.com"
+              href="mailto:hello@chitramlabs.com"
               className="inline-flex items-center gap-2 border border-dark-surface-foreground px-6 py-3 mt-8 uppercase tracking-widest text-sm font-medium text-dark-surface-foreground hover:bg-dark-surface-foreground hover:text-dark-surface transition-all duration-300"
             >
               Let's Create Together
@@ -71,39 +74,28 @@ const FooterSection = () => {
               <div>
                 <span className="text-dark-surface-foreground/60 text-sm">Business Enquiries</span>
                 <a
-                  href="mailto:hello@ssfilms.com"
+                  href="mailto:hello@chitramlabs.com"
                   className="block text-dark-surface-foreground text-lg md:text-xl font-semibold mt-1 hover:text-primary transition-colors"
                 >
-                  hello@ssfilms.com
-                </a>
-              </div>
-              <div>
-                <span className="text-dark-surface-foreground/60 text-sm">Work with us</span>
-                <a
-                  href="mailto:hello@ssfilms.com"
-                  className="block text-dark-surface-foreground text-lg md:text-xl font-semibold mt-1 hover:text-primary transition-colors"
-                >
-                  hello@ssfilms.com
+                  hello@chitramlabs.com
                 </a>
               </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Giant logo watermark */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={inView ? { opacity: 0.15, y: 0 } : {}}
           transition={{ duration: 1.5, delay: 0.5 }}
           className="heading-display text-primary leading-none"
-          style={{ fontSize: "clamp(6rem, 25vw, 20rem)" }}
+          style={{ fontSize: "clamp(4rem, 20vw, 16rem)" }}
         >
-          SS FILMS
+          CHITRAM LABS
         </motion.div>
 
-        {/* Bottom bar */}
         <div className="flex flex-col md:flex-row items-center justify-between mt-8 pt-6 border-t border-dark-surface-foreground/10 text-dark-surface-foreground/40 text-xs uppercase tracking-widest">
-          <span>© SS FILMS 2025 · ALL RIGHTS RESERVED.</span>
+          <span>© CHITRAM LABS 2025 · ALL RIGHTS RESERVED.</span>
           <div className="flex gap-4 mt-4 md:mt-0">
             <span className="cursor-pointer hover:text-dark-surface-foreground/80 transition-colors">Terms</span>
             <span>·</span>

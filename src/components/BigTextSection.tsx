@@ -20,6 +20,21 @@ const BigTextSection = () => {
             <h2 className="heading-mega text-foreground">{line}</h2>
           </motion.div>
         ))}
+
+        {/* Message section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-16 md:mt-24 max-w-2xl mx-auto text-center"
+        >
+          <p className="text-body text-xl md:text-2xl text-muted-foreground italic leading-relaxed">
+            "Jack of all trades but master of ONE — create without limits."
+          </p>
+          <p className="text-body text-sm text-muted-foreground/70 mt-6 uppercase tracking-widest">
+            We believe the future of creativity is not restricted by tools, budgets, or physical constraints. Only by imagination.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

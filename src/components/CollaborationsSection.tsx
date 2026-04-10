@@ -1,52 +1,56 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import collabMadking from "@/assets/collab-madking.png";
+import collabSup from "@/assets/collab-sup.png";
+import collabEeline from "@/assets/collab-eeline.png";
+import collabHoc from "@/assets/collab-hoc.png";
 
-const brandRows = [
-  [
-    "Warner Music", "FILA", "Gillette", "Foot Locker", "Roquette",
-    "IFF", "Hogarth", "Dentsu", "Emirates NBD", "LIWA",
-    "Virgin Music", "Infectious", "FORM", "Museum of the Future",
-  ],
-  [
-    "Adani", "Schbang", "Almost Gods", "Nykaa", "Kotak Life",
-    "Sun TV", "Yash Raj Films", "Sudhir Mishra", "Atlee",
-    "Shekhar Kapur", "Anupam Kher", "Vivek Agarwal", "Kathryn Aboya",
-  ],
+const collaborators = [
+  { name: "Mad King Studios", logo: collabMadking },
+  { name: "SUP", logo: collabSup },
+  { name: "Ee Line Chusava", logo: collabEeline },
+  { name: "HOC", logo: collabHoc },
 ];
 
 const MarqueeRow = ({
-  brands,
+  items,
   direction = "left",
-  speed = 30,
+  speed = 25,
 }: {
-  brands: string[];
+  items: typeof collaborators;
   direction?: "left" | "right";
   speed?: number;
 }) => {
-  const doubled = [...brands, ...brands];
+  const quadrupled = [...items, ...items, ...items, ...items];
   const animDir = direction === "left" ? "-50%" : "0%";
   const animStart = direction === "left" ? "0%" : "-50%";
 
   return (
-    <div className="relative overflow-hidden py-5 group">
-      {/* Fade edges */}
+    <div className="relative overflow-hidden py-8 group">
       <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-background to-transparent" />
       <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-background to-transparent" />
 
       <motion.div
-        className="flex gap-8 md:gap-14 whitespace-nowrap"
+        className="flex items-center gap-16 md:gap-24 whitespace-nowrap"
         animate={{ x: [animStart, animDir] }}
         transition={{
           x: { repeat: Infinity, repeatType: "loop", duration: speed, ease: "linear" },
         }}
       >
-        {doubled.map((brand, i) => (
-          <span
-            key={`${brand}-${i}`}
-            className="text-foreground/40 hover:text-foreground text-sm md:text-base font-medium uppercase tracking-widest transition-colors duration-300 cursor-default select-none flex-shrink-0"
+        {quadrupled.map((collab, i) => (
+          <div
+            key={`${collab.name}-${i}`}
+            className="flex-shrink-0 flex items-center justify-center h-16 md:h-20 px-4 opacity-50 hover:opacity-100 transition-opacity duration-500 cursor-default"
           >
-            {brand}
-          </span>
+            <img
+              src={collab.logo}
+              alt={collab.name}
+              className="h-12 md:h-16 w-auto object-contain"
+              style={{ filter: "grayscale(100%) brightness(1.5)", transition: "filter 0.5s" }}
+              onMouseEnter={(e) => (e.currentTarget.style.filter = "grayscale(0%) brightness(1)")}
+              onMouseLeave={(e) => (e.currentTarget.style.filter = "grayscale(100%) brightness(1.5)")}
+            />
+          </div>
         ))}
       </motion.div>
     </div>
@@ -83,9 +87,9 @@ const CollaborationsSection = () => {
           transition={{ duration: 1, delay: 0.3 }}
           className="border-t border-b border-foreground/10"
         >
-          <MarqueeRow brands={brandRows[0]} direction="left" speed={35} />
+          <MarqueeRow items={collaborators} direction="left" speed={20} />
           <div className="border-t border-foreground/5" />
-          <MarqueeRow brands={brandRows[1]} direction="right" speed={40} />
+          <MarqueeRow items={collaborators} direction="right" speed={25} />
         </motion.div>
       </div>
     </section>

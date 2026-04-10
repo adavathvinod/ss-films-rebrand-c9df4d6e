@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import chitramLogo from "@/assets/chitram-logo.png";
 
 const navItems = [
   { label: "Work", href: "#projects" },
@@ -32,8 +33,20 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between h-16 md:h-20">
-          <a href="#" className="heading-display text-xl md:text-2xl text-primary">
-            SS FILMS
+          <a href="#" className="flex items-center gap-3 group">
+            <motion.img
+              src={chitramLogo}
+              alt="Chitram Labs"
+              className="h-10 w-auto drop-shadow-[0_0_8px_rgba(255,255,255,0.15)]"
+              style={{
+                filter: "brightness(1.1) contrast(1.05)",
+              }}
+              whileHover={{ scale: 1.05, filter: "brightness(1.3) drop-shadow(0 0 12px rgba(255,255,255,0.3))" }}
+              transition={{ duration: 0.3 }}
+            />
+            <span className="heading-display text-lg md:text-xl text-foreground tracking-wider">
+              CHITRAM LABS
+            </span>
           </a>
 
           <div className="hidden md:flex items-center gap-8">

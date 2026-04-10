@@ -4,27 +4,27 @@ import { useRef } from "react";
 const services = [
   {
     num: "01",
-    title: "AI Ad Films",
-    items: ["Product Ads", "Brand Stories", "Social Content"],
+    title: "AI-Generated Ads",
+    items: ["Product Ads", "Social Content", "Performance Creatives"],
     description: "Full-length ad films crafted with cutting-edge AI. From concept to final cut — no cameras, no crews, just pure creative vision.",
   },
   {
     num: "02",
-    title: "Brand Strategy",
-    items: ["Positioning", "Visual Identity", "Market Research"],
-    description: "We don't just make films. We build the strategic foundation that makes your brand unforgettable.",
+    title: "Commercials & Brand Films",
+    items: ["Commercials", "Corporate Films", "Brand Stories"],
+    description: "Cinematic brand experiences engineered for emotional impact. Every frame designed with precision and intentionality.",
   },
   {
     num: "03",
-    title: "Creative Direction",
-    items: ["Storyboarding", "Art Direction", "Motion Design"],
-    description: "Every frame is intentional. Our AI-powered creative process delivers cinematic quality at startup speed.",
+    title: "AI Animations & Music Videos",
+    items: ["AI-Driven Animation", "Music Videos", "Experimental Art Films"],
+    description: "Pushing the boundaries of generative art — from hyper-stylized animations to full music video production powered by AI.",
   },
   {
     num: "04",
-    title: "Growth & Distribution",
-    items: ["Platform Strategy", "Performance", "Optimization"],
-    description: "Great content deserves great distribution. We optimize every asset for maximum impact across channels.",
+    title: "Storytelling & Devotional",
+    items: ["Documentary Shorts", "Devotional Content", "Spiritual Narratives"],
+    description: "Meaningful stories told through the lens of next-gen technology. From documentary shorts to devotional & spiritual visual content.",
   },
 ];
 
@@ -35,7 +35,6 @@ const ServicesSection = () => {
   return (
     <section id="services" ref={ref} className="py-24 md:py-40 px-6 md:px-10 bg-background">
       <div className="max-w-[1400px] mx-auto">
-        {/* Section title - like the reference "WHAT WE DO" */}
         <div className="flex flex-col md:flex-row gap-8 md:gap-20 mb-20">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -43,8 +42,11 @@ const ServicesSection = () => {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="flex-shrink-0"
           >
+            <p className="uppercase tracking-[0.3em] text-xs text-primary font-medium mb-4">
+              What We Provide
+            </p>
             <h2 className="heading-xl text-foreground">
-              WHAT<br />WE<br />DO
+              OUR<br />SERVICES
             </h2>
           </motion.div>
 
@@ -55,15 +57,14 @@ const ServicesSection = () => {
             className="self-end max-w-md"
           >
             <p className="text-body text-foreground font-semibold text-lg">
-              AI Ad Films. Brand Strategy. Creative Direction.
+              AI-Generated Ads. Commercials. Animations. Storytelling.
             </p>
             <p className="text-body text-muted-foreground mt-4">
-              And everything it takes to make them seamless. We combine bold creative instincts with AI-native production to deliver ad films that move brands forward.
+              We are an AI Creatives Studio building cinematic visual experiences at the edge of technology. Minimal. Powerful. Intentional.
             </p>
           </motion.div>
         </div>
 
-        {/* Service cards - tilted like the reference */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, i) => (
             <motion.div
