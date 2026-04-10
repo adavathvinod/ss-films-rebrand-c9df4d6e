@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
+import chitramLogo from "@/assets/chitram-logo.png";
 
 const HeroSection = () => {
   const mouseX = useMotionValue(0);
@@ -20,8 +21,19 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-      {/* Red accent bar at top like the reference */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-primary" />
+
+      {/* Logo watermark behind text */}
+      <motion.img
+        src={chitramLogo}
+        alt=""
+        aria-hidden="true"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.07, scale: 1 }}
+        transition={{ duration: 2, delay: 0.5 }}
+        className="absolute top-1/2 left-1/2 -translate-x-[45%] -translate-y-[55%] w-[50vw] max-w-[600px] pointer-events-none select-none"
+        style={{ filter: "blur(1px)" }}
+      />
 
       {/* Floating decorative elements */}
       <motion.div
@@ -40,7 +52,7 @@ const HeroSection = () => {
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 w-full">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 w-full relative z-10">
         <motion.div
           style={mounted ? { rotateX, rotateY, perspective: 1000 } : {}}
           className="relative"
@@ -51,7 +63,7 @@ const HeroSection = () => {
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="heading-mega text-primary leading-none"
           >
-            SS
+            CHITRAM
           </motion.h1>
           <motion.h1
             initial={{ opacity: 0, y: 80 }}
@@ -59,7 +71,7 @@ const HeroSection = () => {
             transition={{ duration: 1.2, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             className="heading-mega text-primary leading-none -mt-2 md:-mt-6"
           >
-            FILMS
+            LABS
           </motion.h1>
         </motion.div>
 
@@ -73,7 +85,7 @@ const HeroSection = () => {
             Next-Gen Films for Next-Gen Brands.
           </p>
           <p className="text-body text-lg md:text-xl text-foreground font-medium mt-2">
-            We're an AI-first Ad Films studio.
+            We're an AI-first Creatives Studio.
           </p>
         </motion.div>
 
