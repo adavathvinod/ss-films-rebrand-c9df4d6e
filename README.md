@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# SS FILMS
 
 TODO: Document your project here

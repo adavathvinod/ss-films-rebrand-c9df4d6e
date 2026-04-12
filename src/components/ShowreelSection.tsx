@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { Play, Volume2, VolumeX } from "lucide-react";
-import showreelVideo from "@/videos/Generate_AI_ad_202604121822 (1).mp4";
+import showreelVideo from "@/videos/generate_jewellery_ad_202604121821.mp4";
 
 const ShowreelSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
