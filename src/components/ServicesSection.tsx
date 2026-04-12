@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const services = [
   {
@@ -28,12 +28,41 @@ const services = [
   },
 ];
 
+const headlineLines = ["WE ARE", "AI-NATIVE", "WE CREATE", "EMOTION"];
+
 const ServicesSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const [typedLineIndex, setTypedLineIndex] = useState(0);
+  const [typedCharCount, setTypedCharCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) {
+      return;
+    }
+
+    if (typedLineIndex >= headlineLines.length) {
+      return;
+    }
+
+    const currentLine = headlineLines[typedLineIndex];
+    const lineDone = typedCharCount >= currentLine.length;
+    const delay = lineDone ? 260 : 60;
+
+    const timer = window.setTimeout(() => {
+      if (lineDone) {
+        setTypedLineIndex((prev) => prev + 1);
+        setTypedCharCount(0);
+      } else {
+        setTypedCharCount((prev) => prev + 1);
+      }
+    }, delay);
+
+    return () => window.clearTimeout(timer);
+  }, [inView, typedLineIndex, typedCharCount]);
 
   return (
-    <section id="services" ref={ref} className="py-24 md:py-40 px-6 md:px-10 bg-background">
+    <section id="services" ref={ref} className="py-20 md:py-28 px-6 md:px-10 bg-background">
       <div className="max-w-[1400px] mx-auto">
         <div className="flex flex-col md:flex-row gap-8 md:gap-20 mb-20">
           <motion.div
@@ -43,10 +72,37 @@ const ServicesSection = () => {
             className="flex-shrink-0"
           >
             <p className="uppercase tracking-[0.3em] text-xs text-primary font-medium mb-4">
-              What We Provide
+              WHAT SERVICES WE PROVIDE
             </p>
-            <h2 className="heading-xl text-foreground">
-              OUR<br />SERVICES
+            <h2 className="heading-xl text-foreground leading-[0.95]">
+              {headlineLines.map((line, lineIndex) => {
+                const visibleText =
+                  lineIndex < typedLineIndex
+                    ? line
+                    : lineIndex === typedLineIndex
+                      ? line.slice(0, typedCharCount)
+                      : "";
+
+                return (
+                  <motion.span
+                    key={line}
+                    className="block min-h-[1em]"
+                    animate={
+                      inView && lineIndex <= typedLineIndex
+                        ? { y: [0, -5, 0] }
+                        : { y: 0 }
+                    }
+                    transition={{
+                      duration: 1.3,
+                      delay: lineIndex * 0.12,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    {visibleText}
+                  </motion.span>
+                );
+              })}
             </h2>
           </motion.div>
 
@@ -71,9 +127,14 @@ const ServicesSection = () => {
               key={service.num}
               initial={{ opacity: 0, y: 60, rotate: i % 2 === 0 ? -3 : 3 }}
               animate={inView ? { opacity: 1, y: 0, rotate: i % 2 === 0 ? -2 : 2 } : {}}
-              whileHover={{ rotate: 0, scale: 1.03, y: -8 }}
+              whileHover={{
+                rotate: 0,
+                scale: 1.04,
+                y: -12,
+                boxShadow: "0 28px 60px -12px hsl(var(--foreground) / 0.18)",
+              }}
               transition={{ duration: 0.8, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-              className="bg-secondary p-6 md:p-8 card-hover cursor-default"
+              className="bg-secondary p-6 md:p-8 card-hover cursor-default border border-transparent hover:border-border/60"
             >
               <div className="flex items-start justify-between mb-6">
                 <div>

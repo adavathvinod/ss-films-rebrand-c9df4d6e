@@ -40,15 +40,22 @@ const MarqueeRow = ({
         {quadrupled.map((collab, i) => (
           <div
             key={`${collab.name}-${i}`}
-            className="flex-shrink-0 flex items-center justify-center h-16 md:h-20 px-4 opacity-50 hover:opacity-100 transition-opacity duration-500 cursor-default"
+            className="flex-shrink-0 flex items-center justify-center h-16 md:h-20 px-4 opacity-40 hover:opacity-100 transition-all duration-500 cursor-default"
           >
             <img
               src={collab.logo}
               alt={collab.name}
               className="h-12 md:h-16 w-auto object-contain"
-              style={{ filter: "grayscale(100%) brightness(1.5)", transition: "filter 0.5s" }}
-              onMouseEnter={(e) => (e.currentTarget.style.filter = "grayscale(0%) brightness(1)")}
-              onMouseLeave={(e) => (e.currentTarget.style.filter = "grayscale(100%) brightness(1.5)")}
+              loading="lazy"
+              style={{ filter: "grayscale(100%) brightness(1.5)", transition: "filter 0.5s, transform 0.4s" }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLImageElement).style.filter = "grayscale(0%) brightness(1)";
+                (e.currentTarget as HTMLImageElement).style.transform = "scale(1.08)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLImageElement).style.filter = "grayscale(100%) brightness(1.5)";
+                (e.currentTarget as HTMLImageElement).style.transform = "scale(1)";
+              }}
             />
           </div>
         ))}
@@ -65,7 +72,7 @@ const CollaborationsSection = () => {
     <section ref={ref} className="py-20 md:py-28 px-6 bg-background overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: -30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-12"

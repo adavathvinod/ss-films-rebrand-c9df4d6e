@@ -15,6 +15,7 @@ import FAQSection from "@/components/FAQSection";
 import TeamSection from "@/components/TeamSection";
 import ContactSection from "@/components/ContactSection";
 import FooterSection from "@/components/FooterSection";
+import ScrollToTopOrb from "@/components/ScrollToTopOrb";
 
 const Index = () => {
   return (
@@ -36,6 +37,7 @@ const Index = () => {
       <TeamSection />
       <ContactSection />
       <FooterSection />
+      <ScrollToTopOrb />
     </div>
   );
 };

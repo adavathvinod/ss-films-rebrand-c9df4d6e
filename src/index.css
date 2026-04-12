@@ -156,3 +156,79 @@
     box-shadow: 0 0 40px 8px hsl(var(--accent) / 0.3);
   }
 }
+
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.6);
+}
+
+/* ===== TEXT SELECTION ===== */
+::selection {
+  background: hsl(var(--primary) / 0.2);
+  color: hsl(var(--foreground));
+}
+
+/* ===== HIDE DEFAULT CURSOR on pointer-fine devices (custom cursor replaces it) ===== */
+@media (pointer: fine) {
+  html,
+  body,
+  * {
+    cursor: none !important;
+  }
+}
+
+/* ===== FILM GRAIN OVERLAY ===== */
+/* Add class="film-grain" to any section for a cinematic texture */
+.film-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  animation: grain-shift 0.65s steps(2) infinite;
+}
+
+@keyframes grain-shift {
+  0%   { background-position:   0%   0%; }
+  25%  { background-position: -8%  -12%; }
+  50%  { background-position:  12%  10%; }
+  75%  { background-position: -5%   18%; }
+  100% { background-position:   0%   0%; }
+}
+
+/* ===== IMAGE SHIMMER (skeleton placeholder while image loads) ===== */
+.img-shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 30%,
+    hsl(var(--muted-foreground) / 0.08) 50%,
+    hsl(var(--muted)) 70%
+  );
+  background-size: 200% 100%;
+  animation: img-shimmer-loop 1.8s ease-in-out infinite;
+}
+
+@keyframes img-shimmer-loop {
+  0%   { background-position:  200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ===== GPU PERF HINTS for large animated elements ===== */
+.heading-mega,
+.heading-xl,
+.heading-lg {
+  will-change: transform, opacity;
+}

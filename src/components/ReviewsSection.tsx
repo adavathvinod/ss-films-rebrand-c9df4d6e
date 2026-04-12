@@ -58,10 +58,10 @@ const ReviewsSection = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section ref={ref} className="py-24 md:py-40 px-6 md:px-10 bg-background overflow-hidden">
+    <section ref={ref} className="py-20 md:py-28 px-6 md:px-10 bg-background overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: -40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
@@ -85,7 +85,7 @@ const ReviewsSection = () => {
               onMouseLeave={() => setHoveredIdx(null)}
               className={`relative p-8 border transition-all duration-500 cursor-default ${
                 hoveredIdx === i
-                  ? "border-primary/40 bg-primary/5 scale-[1.02]"
+                  ? "border-primary/50 bg-primary/5 scale-[1.02] shadow-[0_20px_60px_-15px_hsl(var(--primary)/0.12)]"
                   : "border-foreground/10 bg-secondary/50"
               } ${i === 3 ? "lg:col-span-2" : ""}`}
             >

@@ -1,18 +1,19 @@
 import { useRef, useEffect, useState } from "react";
-import projectVideo1 from "@/assets/project-video-1.mp4.asset.json";
-import projectVideo2 from "@/assets/project-video-2.mp4.asset.json";
-import projectVideo3 from "@/assets/project-video-3.mp4.asset.json";
-import projectVideo4 from "@/assets/project-video-4.mp4.asset.json";
-import projectVideo5 from "@/assets/project-video-5.mp4.asset.json";
-import projectVideo6 from "@/assets/project-video-6.mp4.asset.json";
+import LazyVideo from "@/components/ui/LazyVideo";
+import projectVideo1 from "@/videos/geerate_realestate_ad_202604121824.mp4";
+import projectVideo2 from "@/videos/geerate_realestate_ad_202604121825.mp4";
+import projectVideo3 from "@/videos/Generate_AI_ad_202604121822.mp4";
+import projectVideo4 from "@/videos/generate_clothing_brand_202604121825.mp4";
+import projectVideo5 from "@/videos/generate_jewellery_ad_202604121820.mp4";
+import projectVideo6 from "@/videos/Generate_AI_ad_202604121822 (1).mp4";
 
 const projects = [
-  { title: "LuxeAura", category: "AD FILM", video: projectVideo1.url },
-  { title: "NeonVibe", category: "BRAND", video: projectVideo2.url },
-  { title: "BiteKraft", category: "PRODUCT", video: projectVideo3.url },
-  { title: "AutoPulse", category: "AD FILM", video: projectVideo4.url },
-  { title: "TechNova", category: "SOCIAL", video: projectVideo5.url },
-  { title: "Chronos", category: "PRODUCT", video: projectVideo6.url },
+  { title: "LuxeAura", category: "AD FILM", video: projectVideo1 },
+  { title: "NeonVibe", category: "BRAND", video: projectVideo2 },
+  { title: "BiteKraft", category: "PRODUCT", video: projectVideo3 },
+  { title: "AutoPulse", category: "AD FILM", video: projectVideo4 },
+  { title: "TechNova", category: "SOCIAL", video: projectVideo5 },
+  { title: "Chronos", category: "PRODUCT", video: projectVideo6 },
 ];
 
 const StickyCard = ({
@@ -59,12 +60,9 @@ const StickyCard = ({
         }}
       >
         {/* Video background */}
-        <video
+        <LazyVideo
           src={project.video}
-          autoPlay
-          loop
-          muted
-          playsInline
+          fallbackSrc="/videos/showreel.mp4"
           className="absolute inset-0 w-full h-full object-cover"
         />
 

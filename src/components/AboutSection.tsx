@@ -1,10 +1,12 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import conceptVideo from "@/assets/about-concept.mp4.asset.json";
-import storyboardVideo from "@/assets/about-storyboard.mp4.asset.json";
-import productionVideo from "@/assets/about-production.mp4.asset.json";
-import editingVideo from "@/assets/about-editing.mp4.asset.json";
-import tadaVideo from "@/assets/about-tada.mp4.asset.json";
+import LazyVideo from "@/components/ui/LazyVideo";
+import aboutVideo1 from "@/videos/AI_ad_for_202604121829.mp4";
+import aboutVideo2 from "@/videos/AI_ad_for_202604121830.mp4";
+import aboutVideo3 from "@/videos/AI_ad_for_202604121831.mp4";
+import aboutVideo4 from "@/videos/AI_ad_for_202604121832.mp4";
+import aboutVideo5 from "@/videos/AI_ad_for_202604121834.mp4";
+import aboutVideo6 from "@/videos/creative_video_like_202604121812.mp4";
 
 interface BentoCard {
   title: string;
@@ -20,19 +22,19 @@ const cards: BentoCard[] = [
   {
     title: "Concept Development",
     subtitle: "We start with a blank page. Just the problem, and a way through it.",
-    video: conceptVideo.url,
+    video: aboutVideo1,
     span: "col-span-1 row-span-2",
     overlay: "dark",
     titlePosition: "bottom",
   },
   {
     title: "AI-Generated Storyboarding",
-    video: storyboardVideo.url,
+    video: aboutVideo2,
     span: "col-span-1 row-span-1",
-    overlay: "light",
-    titlePosition: "top",
+    overlay: "dark",
+    titlePosition: "bottom",
     extraContent: (
-      <p className="text-sm mt-auto font-medium text-center">
+      <p className="text-sm mb-2 font-medium text-left text-white/85">
         AI lets us move <strong>faster</strong>.<br />
         So we spend time where<br />it <strong className="text-primary">matters</strong>.
       </p>
@@ -40,23 +42,23 @@ const cards: BentoCard[] = [
   },
   {
     title: "Production without Production",
-    video: productionVideo.url,
+    video: aboutVideo3,
     span: "col-span-1 row-span-2",
     overlay: "dark",
-    titlePosition: "top",
+    titlePosition: "bottom",
   },
   {
     title: "Creative Partnership",
     subtitle: "We work with you, not just for you.",
-    video: "",
+    video: aboutVideo4,
     span: "col-span-1 row-span-1",
-    overlay: "gradient",
-    titlePosition: "top",
+    overlay: "dark",
+    titlePosition: "bottom",
   },
   {
     title: "AI Editing & Post",
     subtitle: "Cut, color, and finish at lightning speed.",
-    video: editingVideo.url,
+    video: aboutVideo5,
     span: "col-span-1 row-span-1",
     overlay: "dark",
     titlePosition: "bottom",
@@ -64,10 +66,10 @@ const cards: BentoCard[] = [
   {
     title: "Ta da!!",
     subtitle: "Banger videos for socials, ads, and campaigns.",
-    video: tadaVideo.url,
+    video: aboutVideo6,
     span: "col-span-1 row-span-1",
-    overlay: "light",
-    titlePosition: "top",
+    overlay: "dark",
+    titlePosition: "bottom",
     extraContent: (
       <div className="flex items-center gap-1 mb-2">
         <span className="w-2.5 h-2.5 rounded-full bg-primary" />
@@ -83,11 +85,11 @@ const AboutSection = () => {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="about" ref={ref} className="py-24 md:py-40 px-6 md:px-10 bg-background">
+    <section id="about" ref={ref} className="py-20 md:py-28 px-6 md:px-10 bg-background">
       <div className="max-w-[1400px] mx-auto">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: -40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
@@ -112,12 +114,9 @@ const AboutSection = () => {
             >
               {/* Video or gradient background */}
               {card.video ? (
-                <video
+                <LazyVideo
                   src={card.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
+                  fallbackSrc="/videos/showreel.mp4"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               ) : (
@@ -126,13 +125,7 @@ const AboutSection = () => {
 
               {/* Overlay */}
               <div
-                className={`absolute inset-0 ${
-                  card.overlay === "dark"
-                    ? "bg-gradient-to-t from-black/80 via-black/20 to-transparent"
-                    : card.overlay === "gradient"
-                    ? "bg-gradient-to-b from-muted/60 to-muted"
-                    : "bg-black/10"
-                }`}
+                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10"
               />
 
               {/* Content */}
@@ -143,18 +136,14 @@ const AboutSection = () => {
               >
                 {card.extraContent && card.titlePosition === "top" && card.extraContent}
                 <h3
-                  className={`text-lg md:text-xl font-bold ${
-                    card.overlay === "light" ? "text-foreground" : "text-white"
-                  }`}
+                  className="text-lg md:text-xl font-bold text-white"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
                   {card.title}
                 </h3>
                 {card.subtitle && (
                   <p
-                    className={`text-sm mt-1 ${
-                      card.overlay === "light" ? "text-muted-foreground" : "text-white/70"
-                    }`}
+                    className="text-sm mt-1 text-white/75"
                   >
                     {card.subtitle}
                   </p>

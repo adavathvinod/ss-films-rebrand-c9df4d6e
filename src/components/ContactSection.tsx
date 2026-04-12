@@ -34,7 +34,7 @@ const ContactSection = () => {
     <section
       id="booking"
       ref={ref}
-      className="relative py-24 md:py-32 px-6 md:px-10 bg-background overflow-hidden"
+      className="relative py-20 md:py-28 px-6 md:px-10 bg-background overflow-hidden"
     >
       {/* Subtle grid bg */}
       <div

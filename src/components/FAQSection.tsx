@@ -30,10 +30,10 @@ const FAQSection = () => {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" ref={ref} className="py-24 md:py-40 px-6 md:px-10 bg-background">
+    <section id="faq" ref={ref} className="py-20 md:py-28 px-6 md:px-10 bg-background">
       <div className="max-w-[1000px] mx-auto">
         <motion.h2
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: -40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="heading-lg text-foreground mb-16 text-center"

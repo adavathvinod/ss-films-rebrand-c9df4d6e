@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { Play, Volume2, VolumeX } from "lucide-react";
+import showreelVideo from "@/videos/Generate_AI_ad_202604121822 (1).mp4";
 
 const ShowreelSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -23,7 +24,7 @@ const ShowreelSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative h-screen overflow-hidden">
+    <section ref={sectionRef} className="relative h-screen overflow-hidden film-grain">
       {/* Background Video */}
       <motion.div style={{ scale }} className="absolute inset-0">
         <video
@@ -34,7 +35,7 @@ const ShowreelSection = () => {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="/videos/showreel.mp4" type="video/mp4" />
+          <source src={showreelVideo} type="video/mp4" />
         </video>
       </motion.div>
 

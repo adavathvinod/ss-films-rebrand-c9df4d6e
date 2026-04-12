@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import chitramLogo from "@/assets/chitram-logo.png";
+import FloatingImages from "@/components/FloatingImages";
 
 const HeroSection = () => {
   const mouseX = useMotionValue(0);
@@ -8,6 +9,8 @@ const HeroSection = () => {
   const rotateX = useTransform(mouseY, [0, window.innerHeight], [5, -5]);
   const rotateY = useTransform(mouseX, [0, window.innerWidth], [-5, 5]);
   const [mounted, setMounted] = useState(false);
+  const [heroInView, setHeroInView] = useState(true);
+  const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -15,12 +18,32 @@ const HeroSection = () => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
+
     window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
+    return () => {
+      window.removeEventListener("mousemove", handleMouse);
+    };
   }, [mouseX, mouseY]);
 
+  useEffect(() => {
+    const heroEl = heroRef.current;
+    if (!heroEl) return;
+
+    // Active only while hero section is substantially visible.
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroInView(entry.isIntersecting && entry.intersectionRatio > 0.45),
+      { threshold: [0.45] }
+    );
+
+    observer.observe(heroEl);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background film-grain">
+      {/* Floating images that appear on cursor move */}
+      <FloatingImages isActive={heroInView} areaRef={heroRef} />
+
       <div className="absolute top-0 left-0 right-0 h-1 bg-primary" />
 
       {/* Logo watermark behind text */}
@@ -58,16 +81,16 @@ const HeroSection = () => {
           className="relative"
         >
           <motion.h1
-            initial={{ opacity: 0, y: 80 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -80 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="heading-mega text-primary leading-none"
           >
             CHITRAM
           </motion.h1>
           <motion.h1
-            initial={{ opacity: 0, y: 80 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -80 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             className="heading-mega text-primary leading-none -mt-2 md:-mt-6"
           >

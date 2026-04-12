@@ -1,10 +1,41 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import founderImg from "@/assets/founder.jpg";
 import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
 import team3 from "@/assets/team-3.jpg";
 import team4 from "@/assets/team-4.jpg";
+
+/** Renders an image with a shimmer placeholder that fades out when loaded */
+const FadeImg = ({
+  src,
+  alt,
+  className,
+  width,
+  height,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  width?: number;
+  height?: number;
+}) => {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className="relative img-shimmer">
+      <img
+        src={src}
+        alt={alt}
+        className={className}
+        loading="lazy"
+        width={width}
+        height={height}
+        style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.8s ease" }}
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
+  );
+};
 
 const teamMembers = [
   { name: "Priya Sharma", role: "Creative Director", image: team1 },
@@ -18,7 +49,7 @@ const TeamSection = () => {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="section-dark py-24 md:py-36 px-6 md:px-10 relative overflow-hidden">
+    <section ref={ref} className="section-dark py-20 md:py-28 px-6 md:px-10 relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         {/* Founder Section */}
         <motion.div
@@ -38,11 +69,10 @@ const TeamSection = () => {
             className="w-full lg:w-[400px] flex-shrink-0"
           >
             <div className="relative group">
-              <img
+              <FadeImg
                 src={founderImg}
                 alt="Founder of SS Films"
                 className="w-full aspect-[4/5] object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                loading="lazy"
                 width={512}
                 height={640}
               />
@@ -94,12 +124,11 @@ const TeamSection = () => {
               transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
               className="group relative"
             >
-              <div className="overflow-hidden">
-                <img
+              <div className="overflow-hidden relative">
+                <FadeImg
                   src={member.image}
                   alt={member.name}
                   className="w-full aspect-[3/4] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                  loading="lazy"
                   width={512}
                   height={640}
                 />
